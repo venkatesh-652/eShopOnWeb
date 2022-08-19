@@ -1,0 +1,6 @@
+node('docker') {
+  stage('SCM') {
+    checkout poll: false, scm: [$class: 'GitSCM', branches: [[name: 'refs/heads/develop']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/dotnet-architecture/eShopOnWeb.git']]]
+  }
+  stage('SonarQube Analysis') {
+        sh "C:\Users\gvenkatesh\Documents\eShopOnWeb\tests\IntegrationTests\IntegrationTests.csproj -Dsonar.host.url=http://localhost:9000/ -Dsonar.projectName=meanstackap
